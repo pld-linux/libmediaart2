@@ -9,7 +9,7 @@ Summary:	Media art extraction and cache management library
 Summary(pl.UTF-8):	Biblioteka do wydobywania okładek i zarządzania ich pamięcią podręczną
 Name:		libmediaart2
 Version:	1.9.0
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libmediaart/1.9/libmediaart-%{version}.tar.xz
@@ -87,17 +87,17 @@ API documentation for libmediaart library.
 %description apidocs -l pl.UTF-8
 Dokumentacja API biblioteki libmediaart.
 
-%package -n vala-libmediaart
+%package -n vala-libmediaart2
 Summary:	Vala API for libmediaart library
 Summary(pl.UTF-8):	API języka Vala dla biblioteki libmediaart
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala >= 2:0.16
 
-%description -n vala-libmediaart
+%description -n vala-libmediaart2
 Vala API for libmediaart library.
 
-%description -n vala-libmediaart -l pl.UTF-8
+%description -n vala-libmediaart2 -l pl.UTF-8
 API języka Vala dla biblioteki libmediaart.
 
 %prep
@@ -151,7 +151,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_gtkdocdir}/libmediaart
 
 %if %{with vala}
-%files -n vala-libmediaart
+%files -n vala-libmediaart2
 %defattr(644,root,root,755)
 %{_datadir}/vala/vapi/libmediaart-2.0.vapi
 %endif
