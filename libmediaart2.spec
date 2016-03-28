@@ -4,12 +4,12 @@
 %bcond_with	qt4		# use Qt4 instead of Qt5 (if with_qt; only when Qt5 is not installed)
 %bcond_without	static_libs	# static library build
 %bcond_without	vala		# Vala binding
-#
+
 Summary:	Media art extraction and cache management library
 Summary(pl.UTF-8):	Biblioteka do wydobywania okładek i zarządzania ich pamięcią podręczną
 Name:		libmediaart2
 Version:	1.9.0
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libmediaart/1.9/libmediaart-%{version}.tar.xz
@@ -93,6 +93,9 @@ Summary(pl.UTF-8):	API języka Vala dla biblioteki libmediaart
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala >= 2:0.16
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description -n vala-libmediaart2
 Vala API for libmediaart library.
