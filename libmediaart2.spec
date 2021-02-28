@@ -80,9 +80,7 @@ Summary:	libmediaart API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libmediaart
 Group:		Documentation
 Conflicts:	libmediaart-apidocs < 1.9
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for libmediaart library.
@@ -96,9 +94,7 @@ Summary(pl.UTF-8):	API języka Vala dla biblioteki libmediaart
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala >= 2:0.16
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description -n vala-libmediaart2
 Vala API for libmediaart library.
