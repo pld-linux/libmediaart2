@@ -7,12 +7,12 @@
 Summary:	Media art extraction and cache management library
 Summary(pl.UTF-8):	Biblioteka do wydobywania okładek i zarządzania ich pamięcią podręczną
 Name:		libmediaart2
-Version:	1.9.5
+Version:	1.9.6
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/libmediaart/1.9/libmediaart-%{version}.tar.xz
-# Source0-md5:	4a2091ef31386ba3f6292dd98a9233e2
+# Source0-md5:	d5f0a14af136de678248132f371c31ad
 URL:		https://github.com/curlybeast/libmediaart
 %{?with_qt:BuildRequires:	Qt5Gui-devel >= 5.0.0}
 %{!?with_qt:BuildRequires:	gdk-pixbuf2-devel >= 2.12.0}
@@ -25,7 +25,6 @@ BuildRequires:	ninja >= 1.5
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	sed >= 4.0
 %{?with_vala:BuildRequires:	vala >= 2:0.16}
 BuildRequires:	xz
 BuildRequires:	zlib-devel
@@ -105,12 +104,9 @@ API języka Vala dla biblioteki libmediaart.
 %prep
 %setup -q -n libmediaart-%{version}
 
-%if %{with static_libs}
-%{__sed} -i -e '/^libmediaart =/ s/shared_library/library/' libmediaart/meson.build
-%endif
-
 %build
 %meson build \
+	%{!?with_static_libs:--default-library=shared} \
 	-Dgtk_doc=true \
 	-Dimage_library=%{!?with_qt:gdk-pixbuf}%{?with_qt:qt5}
 
