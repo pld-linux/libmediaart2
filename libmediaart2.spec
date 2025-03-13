@@ -7,33 +7,33 @@
 Summary:	Media art extraction and cache management library
 Summary(pl.UTF-8):	Biblioteka do wydobywania okładek i zarządzania ich pamięcią podręczną
 Name:		libmediaart2
-Version:	1.9.6
+Version:	1.9.7
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/libmediaart/1.9/libmediaart-%{version}.tar.xz
-# Source0-md5:	d5f0a14af136de678248132f371c31ad
+# Source0-md5:	acc62b9a65eded5bb43f7e1e9a304904
 URL:		https://github.com/curlybeast/libmediaart
-%{?with_qt:BuildRequires:	Qt5Gui-devel >= 5.0.0}
-%{!?with_qt:BuildRequires:	gdk-pixbuf2-devel >= 2.12.0}
-BuildRequires:	glib2-devel >= 1:2.38.0
+%{?with_qt:BuildRequires:	Qt5Gui-devel >= 5.0.1}
+%{!?with_qt:BuildRequires:	gdk-pixbuf2-devel >= 2.12.1}
+BuildRequires:	glib2-devel >= 1:2.38.1
 BuildRequires:	gobject-introspection-devel >= 1.30.0
 BuildRequires:	gtk-doc >= 1.8
 %{?with_qt:BuildRequires:	libstdc++-devel}
 BuildRequires:	meson >= 0.56.2
 BuildRequires:	ninja >= 1.5
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	tar >= 1:1.22
 %{?with_vala:BuildRequires:	vala >= 2:0.16}
 BuildRequires:	xz
 BuildRequires:	zlib-devel
 %if %{with qt}
-Requires:	Qt5Gui >= 5.0.0
+Requires:	Qt5Gui >= 5.0.1
 %else
-Requires:	gdk-pixbuf2 >= 2.12.0
+Requires:	gdk-pixbuf2 >= 2.12.1
 %endif
-Requires:	glib2 >= 1:2.38.0
+Requires:	glib2 >= 1:2.38.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -49,11 +49,11 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libmediaart
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 %if %{with qt}
-Requires:	Qt5Gui-devel >= 5.0.0
+Requires:	Qt5Gui-devel >= 5.0.1
 %else
-Requires:	gdk-pixbuf2-devel >= 2.12.0
+Requires:	gdk-pixbuf2-devel >= 2.12.1
 %endif
-Requires:	glib2-devel >= 1:2.38.0
+Requires:	glib2-devel >= 1:2.38.1
 Requires:	zlib-devel
 
 %description devel
@@ -105,17 +105,17 @@ API języka Vala dla biblioteki libmediaart.
 %setup -q -n libmediaart-%{version}
 
 %build
-%meson build \
+%meson \
 	%{!?with_static_libs:--default-library=shared} \
 	-Dgtk_doc=true \
 	-Dimage_library=%{!?with_qt:gdk-pixbuf}%{?with_qt:qt5}
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
